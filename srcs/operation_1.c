@@ -14,7 +14,7 @@
 
 void	sa(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list_stack	*tmp;
 
 	if (stack->size_a < 2)
 		return ;
@@ -26,7 +26,7 @@ void	sa(t_stack *stack)
 
 void	sb(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list_stack	*tmp;
 
 	if (stack->size_b < 2)
 		return ;
@@ -44,7 +44,7 @@ void	ss(t_stack *stack)
 
 void	pa(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list_stack	*tmp;
 
 	if (stack->size_b == 0)
 		return ;
@@ -58,7 +58,7 @@ void	pa(t_stack *stack)
 
 void	pb(t_stack *stack)
 {
-	t_list	*tmp;
+	t_list_stack	*tmp;
 
 	if (stack->size_a == 0)
 		return ;

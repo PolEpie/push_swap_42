@@ -18,12 +18,18 @@
 # include <unistd.h>
 # include "libft.h"
 
+
+typedef struct s_list_stack
+{
+	int					content;
+	struct s_list_stack	*next;
+}				t_list_stack;
 typedef struct s_stack
 {
-	t_list		*stack_a;
-	t_list		*stack_b;
-	int			size_a;
-	int			size_b;
+	t_list_stack	*stack_a;
+	t_list_stack	*stack_b;
+	int				size_a;
+	int				size_b;
 }				t_stack;
 
 /* operation_1 */
@@ -42,5 +48,11 @@ void	rrb(t_stack *stack);
 
 /* operation_3 */
 void	rrr(t_stack *stack);
+
+/* target */
+
+/* first_part */
+int		find_target_node(t_list_stack *stack, int number);
+void	push_until_3_dest_stack(t_stack *stack, bool is_a);
 
 #endif

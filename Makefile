@@ -20,7 +20,11 @@ INCLUDE_LIBFT = $(addprefix $(LIBFT), includes/)
 CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE) -I$(INCLUDE_LIBFT)
 RM			=	rm -f
 OBJ_DIR		=	objs
-SRCS		=	push_swap.c
+SRCS		=	push_swap.c \
+				srcs/operation_1.c \
+				srcs/operation_2.c \
+				srcs/operation_3.c \
+				srcs/target.c
 
 OBJS		=	$(SRCS:/%.c=%.o)
 
@@ -29,7 +33,7 @@ $(NAME):		$(OBJS) $(LIBFT_A)
 				@echo "Linked into executable \033[0;32m$(NAME)\033[0m."
 
 test:			$(NAME)
-				@./$(NAME)
+				@./$(NAME) 99 0 25 -38 10 7 42
 
 all:			test
 
