@@ -292,6 +292,7 @@ void	push_until_3_dest_stack(t_stack *stack, bool is_a)
 		i++;
 		src = src->next;
 	}
+    
 	/* if (target_len > 3)
 		push_until_3_dest_stack(stack, is_a); */
 }
