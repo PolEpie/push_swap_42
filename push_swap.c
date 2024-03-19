@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:49:58 by pepie             #+#    #+#             */
-/*   Updated: 2024/03/10 00:49:58 by pepie            ###   ########.fr       */
+/*   Updated: 2024/03/19 14:28:43 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,6 @@ void	print_stacks(t_stack *stack)
 	ft_printf("-----------------\n");
 }
 
-t_list_stack	*ft_lstnew_stack(int content)
-{
-	t_list_stack	*new;
-
-	new = (t_list_stack *)malloc(sizeof(t_list_stack));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	return (new);
-}
-
 int	initialisation(t_stack *stack, int ac, char **av)
 {
 	t_list_stack	*tmp;
@@ -82,11 +70,16 @@ int	main(int ac, char **av)
 	(void)av;
 	t_stack	stack;
 	initialisation(&stack, ac, av);
-	print_stacks(&stack);
 	pb(&stack);
 	pb(&stack);
 	print_stacks(&stack);
-	ft_printf("target node of #1: %d\n", find_target_node(stack.stack_b, stack.stack_a->next->content));
+    
+
+    push_until_3_dest_stack(&stack, true);
+
+	print_stacks(&stack);
+
+	//ft_printf("target node of #1: %d\n", find_target_node(stack.stack_b, stack.stack_a->next->next->next->content));
 	return (0);
 }
 

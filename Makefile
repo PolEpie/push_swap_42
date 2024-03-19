@@ -6,7 +6,7 @@
 #    By: pepie <pepie@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/10 00:50:04 by pepie             #+#    #+#              #
-#    Updated: 2024/03/10 00:50:04 by pepie            ###   ########.fr        #
+#    Updated: 2024/03/19 14:27:16 by pepie            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,11 @@ CFLAGS		=	-Wall -Werror -Wextra -g -I$(INCLUDE) -I$(INCLUDE_LIBFT)
 RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	push_swap.c \
+				srcs/first_part.c \
+				srcs/lst_stack.c \
 				srcs/operation_1.c \
 				srcs/operation_2.c \
-				srcs/operation_3.c \
-				srcs/target.c
+				srcs/operation_3.c
 
 OBJS		=	$(SRCS:/%.c=%.o)
 
