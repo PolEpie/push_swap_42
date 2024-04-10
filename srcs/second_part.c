@@ -72,17 +72,19 @@ void	sort_stack_max_3(t_stack *stack)
 	t_list_stack	*to_sort;
 
 	to_sort = stack->stack_a;
-	if (get_stack_higher_pos(to_sort) == 2)
-	{
-		sort_2_el(stack);
-	}
-	else if (get_stack_higher_pos(to_sort) == 1)
-	{
-		rra(stack);
-	}
-	else if (get_stack_higher_pos(to_sort) == 0)
-	{
-		ra(stack);
+	if (stack->size_a == 3) {
+		if (get_stack_higher_pos(to_sort) == 2)
+		{
+			sort_2_el(stack);
+		}
+		else if (get_stack_higher_pos(to_sort) == 1)
+		{
+			rra(stack);
+		}
+		else if (get_stack_higher_pos(to_sort) == 0)
+		{
+			ra(stack);
+		}
 	}
 	//print_stacks(stack);
 	sort_2_el(stack);
