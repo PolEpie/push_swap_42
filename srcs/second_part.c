@@ -60,7 +60,7 @@ void   sort_stack_with_rotation(t_stack *stack)
 
 void	sort_2_el(t_stack *stack)
 {
-	if (ft_lstgetindex_stack(stack->stack_a, 0) > ft_lstgetindex_stack(stack->stack_a, 1))
+	if (stack->size_a > 1 && ft_lstgetindex_stack(stack->stack_a, 0) > ft_lstgetindex_stack(stack->stack_a, 1))
 	{
 		sa(stack);
 		print_operation(SA);
