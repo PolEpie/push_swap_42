@@ -77,7 +77,7 @@ int	main(int ac, char **av)
 	//print_stacks(&stack);
     
 
-    push_until_3_dest_stack(&stack, true, true);
+    push_until_3_dest_stack(&stack, true);
 
 	//print_stacks(&stack);
 

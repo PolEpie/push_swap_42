@@ -66,11 +66,18 @@ void			rrr(t_stack *stack);
 
 /* first_part */
 int				find_target_node(t_list_stack *stack, int number);
-void			push_until_3_dest_stack(t_stack *stack, bool is_a, bool is_smaller);
+void			push_until_3_dest_stack(t_stack *stack, bool is_a);
 void			print_operation(int op);
+bool			is_stack_sorted(t_list_stack *src);
+t_list_stack	*find_cost(t_stack *stk, int index_src, int index_dst, bool is_a_src);
+void			perform_lst(t_list_stack **lst, t_stack *stack);
 
 /* second_part */
-void			sort_stack(t_stack *stack, bool is_a);
+void			sort_stack_max_3(t_stack *stack, bool is_a);
+void			sort_stack_with_rotation(t_stack *stack);
+
+/* last_part */
+void			push_until_finish(t_stack *stack);
 
 /* lst_stack.c */
 t_list_stack	*ft_lstlast_stack(t_list_stack *lst);

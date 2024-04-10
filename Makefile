@@ -23,6 +23,7 @@ OBJ_DIR		=	objs
 SRCS		=	push_swap.c \
 				srcs/first_part.c \
 				srcs/second_part.c \
+				srcs/last_part.c \
 				srcs/lst_stack.c \
 				srcs/operation_1.c \
 				srcs/operation_2.c \

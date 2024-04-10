@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 int		find_target_node_small(t_list_stack *stack, int number)
 {
 	t_list_stack	*tmp;
@@ -41,45 +40,6 @@ int		find_target_node_small(t_list_stack *stack, int number)
 		while (stack)
 		{
 			if (stack->content > target_value || target_index == -1)
-			{
-				target_index = i;
-				target_value = stack->content;
-			}
-			stack = stack->next;
-			i++;
-		}
-	}
-	return (target_index);
-}
-
-int		find_target_node_big(t_list_stack *stack, int number)
-{
-	t_list_stack	*tmp;
-	int				i;
-	int				target_index;
-	int				target_value;
-
-	tmp = stack;
-	i = 0;
-	target_index = -1;
-	target_value = INT_MAX;
-	while (stack)
-	{
-		if (stack->content > number && (stack->content < target_value || target_index == -1))
-		{
-			target_index = i;
-			target_value = stack->content;
-		}
-		stack = stack->next;
-		i++;
-	}
-	if (target_index == -1)
-	{
-		stack = tmp;
-		i = 0;
-		while (stack)
-		{
-			if (stack->content < target_value || target_index == -1)
 			{
 				target_index = i;
 				target_value = stack->content;
@@ -210,6 +170,8 @@ int handle_move_one_stack(t_move *mv, bool is_a_in, bool is_src)
 		dir = mv->dst_go_up;
 		gap = mv->gap_b;
 	}
+	//mv->tmp = NULL;
+	//ft_printf("dir: %d\tgap: %d %d\n", dir, gap, is_src);
 	if (dir == UP)
 		op = RA;
 	else if (dir == DOWN)
@@ -221,6 +183,7 @@ int handle_move_one_stack(t_move *mv, bool is_a_in, bool is_src)
     while (i < gap)
     {
 		ft_lstadd_back_stack(&mv->tmp, ft_lstnew_stack(op));
+		//print_operation(op);
 		mv->cost = mv->cost + 1;
 		i++;
 	}
@@ -309,6 +272,7 @@ t_list_stack *find_cost(t_stack *stk, int index_src, int index_dst, bool is_a_sr
 	//ft_printf("index_src: %d,\tindex_dst: %d\n", index_src, index_dst);
 	mv->src_go_up = should_go_up(index_src, mv->len_in);
 	mv->dst_go_up = should_go_up(index_dst, mv->len_out);
+	//ft_printf("src_go_up: %d,\tdst_go_up: %d\n", mv->src_go_up, mv->dst_go_up);
 	get_gap(mv);
 	//ft_printf("src_go_up: %d,\tdst_go_up: %d\t|\tgap_a: %d\tgap_b: %d\n", mv->src_go_up, mv->dst_go_up, mv->gap_a, mv->gap_b);
 	if (mv->src_go_up == mv->dst_go_up && mv->src_go_up != NONE)
@@ -325,7 +289,7 @@ t_list_stack *find_cost(t_stack *stk, int index_src, int index_dst, bool is_a_sr
 	return (mv->tmp);
 }
 
-void	find_target_and_push(t_stack *stack, int target_len, t_list_stack *src, t_list_stack *dst, bool is_a_src, bool is_smaller)
+void	find_target_and_push_low(t_stack *stack, t_list_stack *src, t_list_stack *dst)
 {
 	int				i;
 	int				lowest_cost;
@@ -338,15 +302,10 @@ void	find_target_and_push(t_stack *stack, int target_len, t_list_stack *src, t_l
 	lowest_cost = 9999999;
 	lowest_cost_index = -1;
 	lowest = NULL;
-	while (i < target_len && src != NULL)
+	while (i < stack->size_a && src != NULL)
 	{
-		if (is_smaller)
-			tmp = find_cost(stack, i, find_target_node_small(dst, src->content), is_a_src);
-		else
-			tmp = find_cost(stack, i, find_target_node_big(dst, src->content), is_a_src);
+		tmp = find_cost(stack, i, find_target_node_small(dst, src->content), true);
 		cost = ft_lstsize_stack(tmp);
-		if (cost == 0)
-			return case_0_cost(stack, is_a_src);
 		if (cost < lowest_cost)
 		{
 			if (lowest != NULL)
@@ -354,47 +313,45 @@ void	find_target_and_push(t_stack *stack, int target_len, t_list_stack *src, t_l
 			lowest_cost = cost;
 			lowest_cost_index = i;
 			lowest = tmp;
+			if (cost == 0)
+				break;
 		}
 		i++;
 		src = src->next;
 	}
-	if (lowest != NULL && lowest_cost_index != -1)
+	if (lowest_cost_index != -1)
 	{
-		if (is_a_src)
-			ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PB));
-		else
-			ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PA));
+		ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PB));
 		perform_lst(&lowest, stack);
 	}
 }
 
-void	push_until_3_dest_stack(t_stack *stack, bool is_a_src, bool is_smaller)
+bool	is_stack_sorted(t_list_stack *src)
 {
-	t_list_stack	*src;
-	t_list_stack	*dst;
-	int				target_len;
-	int				src_len;
+	int		last;
+	int		current;
 
-	if (is_a_src)
+	if (src == NULL)
+		return (true);
+	last = src->content;
+	src = src->next;
+	while (src)
 	{
-		target_len = stack->size_b;
-		src_len = stack->size_a;
-		src = stack->stack_a;
-		dst = stack->stack_b;
+		current = src->content;
+		//ft_printf("%d last: %d\tcurrent: %d\n", current < last, last, current);
+		if (current < last)
+			return (false);
+		last = current;
+		src = src->next;
 	}
-	else
-	{
-		target_len = stack->size_a;
-		src_len = stack->size_b;
-		src = stack->stack_b;
-		dst = stack->stack_a;
-	}
-	if (src_len == 0 && !is_smaller)
-		return ;
-	find_target_and_push(stack, target_len, src, dst, is_a_src, is_smaller);
-	if (src_len > 4 || !is_a_src)
-		return (push_until_3_dest_stack(stack, is_a_src, is_smaller));
-	//ft_printf("CHANGEMEBT: %d\n", is_a_src);
-	sort_stack(stack, is_a_src);
-	return (push_until_3_dest_stack(stack, !is_a_src, !is_smaller));
+	return (true);
+}
+
+void	push_until_3_dest_stack(t_stack *stack, bool is_a_src)
+{
+	find_target_and_push_low(stack, stack->stack_a, stack->stack_b);
+	if (stack->size_a > 3)
+		return (push_until_3_dest_stack(stack, is_a_src));
+	sort_stack_max_3(stack, is_a_src);
+	return (push_until_finish(stack));
 }
