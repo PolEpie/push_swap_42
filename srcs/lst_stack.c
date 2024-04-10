@@ -47,3 +47,55 @@ t_list_stack   *ft_lstlast_stack(t_list_stack *lst)
         lst = lst->next;
     return (lst);
 }
+
+int	ft_lstsize_stack(t_list_stack *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_lstclear_stack(t_list_stack **lst)
+{
+	t_list_stack	*tmp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
+}
+
+int	ft_lstlast_content(t_list_stack *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst->content);
+}
+
+int ft_lstgetindex_stack(t_list_stack *lst, int index)
+{
+	int i;
+
+	i = 0;
+	while (lst)
+	{
+		if (i == index)
+			return (lst->content);
+		lst = lst->next;
+		i++;
+	}
+	return (-1);
+}

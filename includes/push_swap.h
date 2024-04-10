@@ -66,12 +66,19 @@ void			rrr(t_stack *stack);
 
 /* first_part */
 int				find_target_node(t_list_stack *stack, int number);
-void			push_until_3_dest_stack(t_stack *stack, bool is_a);
+void			push_until_3_dest_stack(t_stack *stack, bool is_a, bool is_smaller);
+void			print_operation(int op);
+
+/* second_part */
+void			sort_stack(t_stack *stack, bool is_a);
 
 /* lst_stack.c */
 t_list_stack	*ft_lstlast_stack(t_list_stack *lst);
 t_list_stack	*ft_lstnew_stack(int content);
 void			ft_lstadd_back_stack(t_list_stack **alst, t_list_stack *new);
+int				ft_lstsize_stack(t_list_stack *lst);
+void			ft_lstclear_stack(t_list_stack **lst);
+int				ft_lstgetindex_stack(t_list_stack *lst, int index);
 
 /* push_swap.c */
 void			print_stacks(t_stack *stack);

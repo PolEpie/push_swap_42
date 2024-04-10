@@ -72,12 +72,14 @@ int	main(int ac, char **av)
 	initialisation(&stack, ac, av);
 	pb(&stack);
 	pb(&stack);
-	print_stacks(&stack);
+	print_operation(PB);
+	print_operation(PB);
+	//print_stacks(&stack);
     
 
-    push_until_3_dest_stack(&stack, true);
+    push_until_3_dest_stack(&stack, true, true);
 
-	print_stacks(&stack);
+	//print_stacks(&stack);
 
 	//ft_printf("target node of #1: %d\n", find_target_node(stack.stack_b, stack.stack_a->next->next->next->content));
 	return (0);

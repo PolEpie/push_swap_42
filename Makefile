@@ -22,6 +22,7 @@ RM			=	rm -f
 OBJ_DIR		=	objs
 SRCS		=	push_swap.c \
 				srcs/first_part.c \
+				srcs/second_part.c \
 				srcs/lst_stack.c \
 				srcs/operation_1.c \
 				srcs/operation_2.c \
@@ -35,6 +36,9 @@ $(NAME):		$(OBJS) $(LIBFT_A)
 
 test:			$(NAME)
 				@./$(NAME) 99 0 25 -38 10 7 42
+
+test_2:			$(NAME)
+				@./$(NAME) 34 345 34 4 65 4 23 -5 -456 34 32453 -3456 456 45 6 -56
 
 all:			test
 
