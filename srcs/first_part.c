@@ -347,11 +347,11 @@ bool	is_stack_sorted(t_list_stack *src)
 	return (true);
 }
 
-void	push_until_3_dest_stack(t_stack *stack, bool is_a_src)
+void	push_until_3_dest_stack(t_stack *stack)
 {
 	find_target_and_push_low(stack, stack->stack_a, stack->stack_b);
 	if (stack->size_a > 3)
-		return (push_until_3_dest_stack(stack, is_a_src));
-	sort_stack_max_3(stack, is_a_src);
+		return (push_until_3_dest_stack(stack));
+	sort_stack_max_3(stack);
 	return (push_until_finish(stack));
 }

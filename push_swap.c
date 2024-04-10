@@ -76,8 +76,7 @@ int	main(int ac, char **av)
 	print_operation(PB);
 	//print_stacks(&stack);
     
-
-    push_until_3_dest_stack(&stack, true);
+    push_until_3_dest_stack(&stack);
 
 	//print_stacks(&stack);
 

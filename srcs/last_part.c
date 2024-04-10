@@ -97,10 +97,11 @@ void	push_until_finish(t_stack *stack)
 {
 	if (stack->size_b == 0)
 	{
-		sort_stack_with_rotation(stack);
 		//print_stacks(stack);
+		sort_stack_with_rotation(stack);
 		return ;
 	}
+	//print_stacks(stack);
 	find_target_and_push_big(stack, stack->stack_b, stack->stack_a);
 	return (push_until_finish(stack));
 }

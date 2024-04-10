@@ -58,36 +58,23 @@ void   sort_stack_with_rotation(t_stack *stack)
 	}
 }
 
-void	sort_2_el(t_stack *stack, bool is_a, t_list_stack *to_sort)
+void	sort_2_el(t_stack *stack)
 {
-	if (ft_lstgetindex_stack(to_sort, 0) > ft_lstgetindex_stack(to_sort, 1))
+	if (ft_lstgetindex_stack(stack->stack_a, 0) > ft_lstgetindex_stack(stack->stack_a, 1))
 	{
-		if (is_a)
-		{
-			sa(stack);
-			print_operation(SA);
-		}
-		else
-		{
-			sb(stack);
-			print_operation(SB);
-		}
+		sa(stack);
+		print_operation(SA);
 	}
 }
 
-void	sort_stack_max_3(t_stack *stack, bool is_a)
+void	sort_stack_max_3(t_stack *stack)
 {
 	t_list_stack	*to_sort;
 
-	if (is_a)
-		to_sort = stack->stack_a;
-	else
-		to_sort = stack->stack_b;
-	//print_stacks(stack);
-	//ft_printf("to_sort: %d\n", get_stack_higher_pos(to_sort));
+	to_sort = stack->stack_a;
 	if (get_stack_higher_pos(to_sort) == 2)
 	{
-		sort_2_el(stack, is_a, to_sort);
+		sort_2_el(stack);
 	}
 	else if (get_stack_higher_pos(to_sort) == 1)
 	{
@@ -98,5 +85,5 @@ void	sort_stack_max_3(t_stack *stack, bool is_a)
 		ra(stack);
 	}
 	//print_stacks(stack);
-	sort_2_el(stack, is_a, to_sort);
+	sort_2_el(stack);
 }
