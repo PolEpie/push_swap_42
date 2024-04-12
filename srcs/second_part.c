@@ -59,7 +59,7 @@ void   sort_stack_with_rotation(t_stack *stack)
 }
 
 void	sort_2_el(t_stack *stack)
-{
+{	
 	if (stack->size_a > 1 && ft_lstgetindex_stack(stack->stack_a, 0) > ft_lstgetindex_stack(stack->stack_a, 1))
 	{
 		sa(stack);
@@ -80,12 +80,14 @@ void	sort_stack_max_3(t_stack *stack)
 		else if (get_stack_higher_pos(to_sort) == 1)
 		{
 			rra(stack);
+			print_operation(RRA);
 		}
 		else if (get_stack_higher_pos(to_sort) == 0)
 		{
 			ra(stack);
+			print_operation(RA);
 		}
+		sort_2_el(stack);
 	}
 	//print_stacks(stack);
-	sort_2_el(stack);
 }

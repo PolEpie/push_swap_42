@@ -70,6 +70,7 @@ int	main(int ac, char **av)
 	(void)av;
 	t_stack	stack;
 	initialisation(&stack, ac, av);
+	//print_stacks(&stack);
 
 	if (stack.size_a <= 3)
 		return (sort_stack_max_3(&stack), 0);
