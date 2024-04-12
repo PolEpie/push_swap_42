@@ -44,32 +44,65 @@ void	print_stacks(t_stack *stack)
 	ft_printf("-----------------\n");
 }
 
-int	initialisation(t_stack *stack, int ac, char **av)
+int	initialisation(t_stack *stack, char *input)
 {
 	t_list_stack	*tmp;
-	int	i;
+	char			**inputs;
 
-	i = 1;
-	stack->stack_a = ft_lstnew_stack(ft_atoi(av[i]));
+	inputs = ft_split(input, ' ');
+	if (!inputs)
+		return (1);
+	stack->stack_a = ft_lstnew_stack(ft_atoi(*inputs));
+	if (!stack->stack_a)
+		return (1);
 	stack->size_a = 1;
 	tmp = stack->stack_a;
-	while (++i < ac)
+	inputs++;
+	while (*inputs)
 	{
-		tmp->next = ft_lstnew_stack(ft_atoi(av[i]));
+		tmp->next = ft_lstnew_stack(ft_atoi(*inputs));
+		if (!tmp->next)
+			return (1);
 		tmp = tmp->next;
 		stack->size_a++;
+		inputs++;
 	}
 	stack->stack_b = NULL;
 	stack->size_b = 0;
 	return (0);
 }
 
+char	*concat_input(int ac, char **av)
+{
+	char	*input;
+	int		i;
+
+	i = 1;
+	input = ft_strdup(av[i]);
+	if (!input)
+		return (NULL);
+	while (++i < ac)
+	{
+		input = ft_strjoin(input, " ");
+		if (!input)
+			return (NULL);
+		input = ft_strjoin(input, av[i]);
+		if (!input)
+			return (NULL);
+	}
+	return (input);
+}
+
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
 	t_stack	stack;
-	initialisation(&stack, ac, av);
+	char	*input;
+
+	input = concat_input(ac, av);
+	if (!input)
+		return (ft_printf("Error\n"),1);
+	if (!initialisation(&stack, input))
+		return (ft_printf("Error\n"),1);
 	//print_stacks(&stack);
 
 	if (stack.size_a <= 3)
