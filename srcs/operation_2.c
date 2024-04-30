@@ -14,8 +14,8 @@
 
 void	ra(t_stack *stack)
 {
-	t_list_stack	*tmp;
-	t_list_stack	*last;
+	t_list_s	*tmp;
+	t_list_s	*last;
 
 	if (stack->size_a < 2)
 		return ;
@@ -30,8 +30,8 @@ void	ra(t_stack *stack)
 
 void	rb(t_stack *stack)
 {
-	t_list_stack	*tmp;
-	t_list_stack	*last;
+	t_list_s	*tmp;
+	t_list_s	*last;
 
 	if (stack->size_b < 2)
 		return ;
@@ -52,8 +52,8 @@ void	rr(t_stack *stack)
 
 void	rra(t_stack *stack)
 {
-	t_list_stack	*tmp;
-	t_list_stack	*last;
+	t_list_s	*tmp;
+	t_list_s	*last;
 
 	if (stack->size_a < 2)
 		return ;
@@ -68,8 +68,8 @@ void	rra(t_stack *stack)
 
 void	rrb(t_stack *stack)
 {
-	t_list_stack	*tmp;
-	t_list_stack	*last;
+	t_list_s	*tmp;
+	t_list_s	*last;
 
 	if (stack->size_b < 2)
 		return ;

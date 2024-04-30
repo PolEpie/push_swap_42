@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:49:58 by pepie             #+#    #+#             */
-/*   Updated: 2024/03/19 14:28:43 by pepie            ###   ########.fr       */
+/*   Updated: 2024/04/30 15:24:00 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	print_stacks(t_stack *stack)
 {
-	t_list_stack	*tmp1;
-	t_list_stack	*tmp2;
-	int				i;
+	t_list_s	*tmp1;
+	t_list_s	*tmp2;
+	int			i;
 
 	tmp1 = stack->stack_a;
 	tmp2 = stack->stack_b;
@@ -31,7 +31,7 @@ void	print_stacks(t_stack *stack)
 			tmp1 = tmp1->next;
 		}
 		else
-		ft_printf("x\t");
+			ft_printf("x\t");
 		if (tmp2)
 		{
 			ft_printf("%d\n", tmp2->content);
@@ -44,26 +44,70 @@ void	print_stacks(t_stack *stack)
 	ft_printf("-----------------\n");
 }
 
+bool	is_number_valid(char *str)
+{
+	int			i;
+	int			minus_count;
+	bool		is_numeric;
+
+	i = 0;
+	minus_count = 0;
+	is_numeric = false;
+	while (str[i])
+	{
+		if (str[i] == '-')
+		{
+			minus_count++;
+			i++;
+		}
+		else if ((str[i] >= '0' && str[i] <= '9'))
+		{
+			is_numeric = true;
+			i++;
+		}
+		else
+			return (false);
+	}
+	return (minus_count <= 1 && is_numeric);
+}
+
+bool	is_numeric(char *str, t_list_s **s)
+{
+	t_list_s	*tmp;
+	long		num;
+
+	if (!is_number_valid(str))
+		return (false);
+	tmp = *s;
+	num = ft_atol(str);
+	if (num < INT_MIN || num > INT_MAX)
+		return (false);
+	while (tmp)
+	{
+		if (tmp->content == num)
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
+
 int	initialisation(t_stack *stack, char *input)
 {
-	t_list_stack	*tmp;
-	char			**inputs;
+	t_list_s	*tmp;
+	char		**inputs;
 
 	inputs = ft_split(input, ' ');
 	if (!inputs)
 		return (1);
-	stack->stack_a = ft_lstnew_stack(ft_atoi(*inputs));
-	if (!stack->stack_a)
-		return (1);
-	stack->size_a = 1;
+	stack->size_a = 0;
 	tmp = stack->stack_a;
-	inputs++;
-	while (*inputs)
+	while (*inputs != NULL)
 	{
-		tmp->next = ft_lstnew_stack(ft_atoi(*inputs));
-		if (!tmp->next)
+		if (is_numeric(*inputs, &stack->stack_a) == false)
 			return (1);
-		tmp = tmp->next;
+		if (!ft_lstadd_back_stack(&stack->stack_a,
+				ft_lstnew_stack(ft_atoi(*inputs))))
+			return (1);
 		stack->size_a++;
 		inputs++;
 	}
@@ -81,7 +125,8 @@ char	*concat_input(int ac, char **av)
 	input = ft_strdup(av[i]);
 	if (!input)
 		return (NULL);
-	while (++i < ac)
+	i++;
+	while (i < ac)
 	{
 		input = ft_strjoin(input, " ");
 		if (!input)
@@ -89,6 +134,7 @@ char	*concat_input(int ac, char **av)
 		input = ft_strjoin(input, av[i]);
 		if (!input)
 			return (NULL);
+		i++;
 	}
 	return (input);
 }
@@ -98,32 +144,23 @@ int	main(int ac, char **av)
 	t_stack	stack;
 	char	*input;
 
+	if (ac < 2)
+		return (write(2, "Error\n", 6), 1);
 	input = concat_input(ac, av);
 	if (!input)
-		return (ft_printf("Error\n"),1);
-	if (!initialisation(&stack, input))
-		return (ft_printf("Error\n"),1);
-	//print_stacks(&stack);
-
+		return (write(2, "Error\n", 6), 1);
+	if (initialisation(&stack, input) == 1)
+		return (write(2, "Error\n", 6), 1);
 	if (stack.size_a <= 3)
 		return (sort_stack_max_3(&stack), 0);
-	/* {
-		sort_stack_max_3(&stack);
-		print_stacks(&stack);
+	if (is_stack_sorted(stack.stack_a))
 		return (0);
-	} */
-
 	pb(&stack);
 	pb(&stack);
 	print_operation(PB);
 	print_operation(PB);
-	//print_stacks(&stack);
-    
-    push_until_3_dest_stack(&stack);
-
-	//print_stacks(&stack);
-
-	//ft_printf("target node of #1: %d\n", find_target_node(stack.stack_b, stack.stack_a->next->next->next->content));
+	if (!push_until_3_dest_stack(&stack))
+		return (write(2, "Error\n", 6), 1);
 	return (0);
 }
 
