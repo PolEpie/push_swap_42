@@ -6,7 +6,7 @@
 #    By: pepie <pepie@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/10 00:50:04 by pepie             #+#    #+#              #
-#    Updated: 2024/04/30 15:17:55 by pepie            ###   ########.fr        #
+#    Updated: 2024/05/01 10:44:52 by pepie            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRCS		=	push_swap.c \
 				srcs/first_part.c \
 				srcs/first_part_cost.c \
 				srcs/second_part.c \
-				srcs/last_part.c \
 				srcs/lst_stack.c \
 				srcs/lst_stack_2.c \
 				srcs/operation_1.c \

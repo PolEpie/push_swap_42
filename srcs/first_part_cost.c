@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:55:55 by pepie             #+#    #+#             */
-/*   Updated: 2024/04/30 15:17:00 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/01 10:55:24 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,18 @@ t_list_s	*find_cost(t_stack *stk, int i_src, int index_dst, bool is_a_src)
 	return (mv->tmp);
 }
 
-void	find_target_and_push_low(t_stack *stack, t_list_s *src, t_list_s *dst)
-{
+typedef struct s_find_target {
 	int				i;
 	int				lowest_cost;
 	int				lowest_cost_index;
-	int				cost;
-	t_list_s		*tmp;
+}	t_find_target;
+
+void	find_target_and_push_low(t_stack *stack, t_list_s *src, t_list_s *dst)
+{
 	t_list_s		*lowest;
 
-	i = 0;
-	lowest_cost = 9999999;
-	lowest_cost_index = -1;
-	lowest = NULL;
-	tmp = find_cost(stack, i, find_target_node_small(dst, src->content), true);
-	cost = ft_lstsize_stack(tmp);
-	if (cost < lowest_cost)
-	{
-		if (lowest != NULL)
-			ft_lstclear_stack(&lowest);
-		lowest_cost = cost;
-		lowest_cost_index = i;
-		lowest = tmp;
-	}
-	i++;
-	src = src->next;
-	if (lowest_cost_index != -1)
-	{
-		ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PB));
-		perform_lst(&lowest, stack);
-	}
+	lowest = find_cost(stack, 0,
+			find_target_node_small(dst, src->content), true);
+	ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PB));
+	perform_lst(&lowest, stack);
 }

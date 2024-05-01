@@ -6,13 +6,13 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:49:58 by pepie             #+#    #+#             */
-/*   Updated: 2024/04/30 15:24:00 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/01 10:45:35 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stacks(t_stack *stack)
+/* void	print_stacks(t_stack *stack)
 {
 	t_list_s	*tmp1;
 	t_list_s	*tmp2;
@@ -42,7 +42,7 @@ void	print_stacks(t_stack *stack)
 		i++;
 	}
 	ft_printf("-----------------\n");
-}
+} */
 
 bool	is_number_valid(char *str)
 {

@@ -38,6 +38,18 @@ void	print_operation(int op)
 		ft_printf("rrr\n");
 }
 
+void	perform_lst_part_2(int content, t_stack *stack)
+{
+	if (content == RR)
+		rr(stack);
+	else if (content == RRA)
+		rra(stack);
+	else if (content == RRB)
+		rrb(stack);
+	else if (content == RRR)
+		rrr(stack);
+}
+
 void	perform_lst(t_list_s **lst, t_stack *stack)
 {
 	t_list_s	*tmp;
@@ -59,14 +71,8 @@ void	perform_lst(t_list_s **lst, t_stack *stack)
 			ra(stack);
 		else if (tmp->content == RB)
 			rb(stack);
-		else if (tmp->content == RR)
-			rr(stack);
-		else if (tmp->content == RRA)
-			rra(stack);
-		else if (tmp->content == RRB)
-			rrb(stack);
-		else if (tmp->content == RRR)
-			rrr(stack);
+		else
+			perform_lst_part_2(tmp->content, stack);
 		print_operation(tmp->content);
 		tmp = tmp->next;
 	}

@@ -120,6 +120,6 @@ void			print_stacks(t_stack *stack);
 int				handle_move_both_stack(t_move *mv);
 void			handle_move_one_stack(t_move *mv, bool is_a_in, bool is_src);
 
-void			find_target_and_push_low(t_stack *stack, t_list_s *src, t_list_s *dst);
+void			find_target_and_push_low(t_stack *sk, t_list_s *s, t_list_s *d);
 
 #endif
