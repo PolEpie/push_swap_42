@@ -98,6 +98,7 @@ void			sort_stack_with_rotation(t_stack *stack);
 
 /* last_part */
 bool			push_until_finish(t_stack *stack);
+void			finish(t_stack *stack);
 
 /* lst_stack.c */
 t_list_s		*ft_lstlast_stack(t_list_s *lst);

@@ -6,12 +6,12 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:49:58 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/01 12:01:44 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/01 13:04:58 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/* 
 void	print_stacks(t_stack *stack)
 {
 	t_list_s	*tmp1;
@@ -42,7 +42,7 @@ void	print_stacks(t_stack *stack)
 		i++;
 	}
 	ft_printf("-----------------\n");
-}
+} */
 
 bool	is_number_valid(char *str)
 {
@@ -57,6 +57,8 @@ bool	is_number_valid(char *str)
 	{
 		if (str[i] == '-')
 		{
+			if (is_numeric)
+				return (false);
 			minus_count++;
 			i++;
 		}
@@ -151,12 +153,6 @@ char	*concat_input(int ac, char **av)
 	return (input);
 }
 
-void	finish(t_stack *stack)
-{
-	ft_lstclear_stack(&stack->stack_a);
-	ft_lstclear_stack(&stack->stack_b);
-}
-
 int	main(int ac, char **av)
 {
 	t_stack	stack;
@@ -165,7 +161,7 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (write(2, "Error\n", 6), 1);
 	input = concat_input(ac, av);
-	if (!input)
+	if (!input || input[0] == 0)
 		return (write(2, "Error\n", 6), 1);
 	stack.stack_a = NULL;
 	stack.stack_b = NULL;
