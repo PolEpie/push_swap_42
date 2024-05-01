@@ -48,11 +48,16 @@ void	perform_lst_part_2(int content, t_stack *stack)
 		rrb(stack);
 	else if (content == RRR)
 		rrr(stack);
+	else if (content == RB)
+		rb(stack);
+	else if (content == RA)
+		ra(stack);
 }
 
 void	perform_lst(t_list_s **lst, t_stack *stack)
 {
 	t_list_s	*tmp;
+	t_list_s	*old;
 
 	tmp = *lst;
 	while (tmp)
@@ -67,14 +72,12 @@ void	perform_lst(t_list_s **lst, t_stack *stack)
 			pa(stack);
 		else if (tmp->content == PB)
 			pb(stack);
-		else if (tmp->content == RA)
-			ra(stack);
-		else if (tmp->content == RB)
-			rb(stack);
 		else
 			perform_lst_part_2(tmp->content, stack);
 		print_operation(tmp->content);
+		old = tmp;
 		tmp = tmp->next;
+		free(old);
 	}
 }
 

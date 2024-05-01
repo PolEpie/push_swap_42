@@ -6,7 +6,7 @@
 #    By: pepie <pepie@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/10 00:50:04 by pepie             #+#    #+#              #
-#    Updated: 2024/05/01 10:44:52 by pepie            ###   ########.fr        #
+#    Updated: 2024/05/01 11:45:10 by pepie            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(NAME):		$(OBJS) $(LIBFT_A)
 				@echo "Linked into executable \033[0;32m$(NAME)\033[0m."
 
 test:			$(NAME)
-				@./$(NAME) 99 0 25 -38 10 7 42
+				valgrind --leak-check=full -s ./$(NAME) 99 0 25 -38 10 7 42
 
 test_2:			$(NAME)
 				@./$(NAME) 34 345 34 4 65 4 23 -5 -456 34 32453 -3456 456 45 6 -56

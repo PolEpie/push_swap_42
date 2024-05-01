@@ -6,13 +6,13 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 00:49:58 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/01 10:45:35 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/01 12:01:44 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/* void	print_stacks(t_stack *stack)
+void	print_stacks(t_stack *stack)
 {
 	t_list_s	*tmp1;
 	t_list_s	*tmp2;
@@ -42,7 +42,7 @@
 		i++;
 	}
 	ft_printf("-----------------\n");
-} */
+}
 
 bool	is_number_valid(char *str)
 {
@@ -82,11 +82,14 @@ bool	is_numeric(char *str, t_list_s **s)
 	num = ft_atol(str);
 	if (num < INT_MIN || num > INT_MAX)
 		return (false);
-	while (tmp)
+	if (s && tmp)
 	{
-		if (tmp->content == num)
-			return (false);
-		tmp = tmp->next;
+		while (tmp)
+		{
+			if (tmp->content == num)
+				return (false);
+			tmp = tmp->next;
+		}
 	}
 	return (true);
 }
@@ -95,10 +98,12 @@ int	initialisation(t_stack *stack, char *input)
 {
 	t_list_s	*tmp;
 	char		**inputs;
+	char		**inputs_og;
 
 	inputs = ft_split(input, ' ');
 	if (!inputs)
 		return (1);
+	inputs_og = inputs;
 	stack->size_a = 0;
 	tmp = stack->stack_a;
 	while (*inputs != NULL)
@@ -109,16 +114,19 @@ int	initialisation(t_stack *stack, char *input)
 				ft_lstnew_stack(ft_atoi(*inputs))))
 			return (1);
 		stack->size_a++;
+		free(*inputs);
 		inputs++;
 	}
-	stack->stack_b = NULL;
+	free(inputs_og);
 	stack->size_b = 0;
+	free(input);
 	return (0);
 }
 
 char	*concat_input(int ac, char **av)
 {
 	char	*input;
+	char	*tmp;
 	int		i;
 
 	i = 1;
@@ -128,15 +136,25 @@ char	*concat_input(int ac, char **av)
 	i++;
 	while (i < ac)
 	{
-		input = ft_strjoin(input, " ");
+		tmp = ft_strjoin(input, " ");
+		free(input);
+		input = tmp;
 		if (!input)
 			return (NULL);
-		input = ft_strjoin(input, av[i]);
+		tmp = ft_strjoin(input, av[i]);
+		free(input);
+		input = tmp;
 		if (!input)
 			return (NULL);
 		i++;
 	}
 	return (input);
+}
+
+void	finish(t_stack *stack)
+{
+	ft_lstclear_stack(&stack->stack_a);
+	ft_lstclear_stack(&stack->stack_b);
 }
 
 int	main(int ac, char **av)
@@ -149,18 +167,21 @@ int	main(int ac, char **av)
 	input = concat_input(ac, av);
 	if (!input)
 		return (write(2, "Error\n", 6), 1);
+	stack.stack_a = NULL;
+	stack.stack_b = NULL;
 	if (initialisation(&stack, input) == 1)
 		return (write(2, "Error\n", 6), 1);
 	if (stack.size_a <= 3)
-		return (sort_stack_max_3(&stack), 0);
+		return (sort_stack_max_3(&stack), finish(&stack), 0);
 	if (is_stack_sorted(stack.stack_a))
-		return (0);
+		return (finish(&stack), 0);
 	pb(&stack);
 	pb(&stack);
 	print_operation(PB);
 	print_operation(PB);
 	if (!push_until_3_dest_stack(&stack))
-		return (write(2, "Error\n", 6), 1);
+		return (finish(&stack), write(2, "Error\n", 6), 1);
+	finish(&stack);
 	return (0);
 }
 

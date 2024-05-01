@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:55:55 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/01 10:55:24 by pepie            ###   ########.fr       */
+/*   Updated: 2024/05/01 11:37:04 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	init_mv(t_move *mv, t_stack *stk, bool is_a_src, int i_src)
 
 t_list_s	*find_cost(t_stack *stk, int i_src, int index_dst, bool is_a_src)
 {
-	t_move	*mv;
+	t_move		*mv;
+	t_list_s	*tmp;
 
 	mv = malloc(sizeof(t_move));
 	if (!mv)
@@ -73,7 +74,9 @@ t_list_s	*find_cost(t_stack *stk, int i_src, int index_dst, bool is_a_src)
 		handle_move_one_stack(mv, is_a_src, true);
 	if (mv->dst_go_up != NONE)
 		handle_move_one_stack(mv, !is_a_src, false);
-	return (mv->tmp);
+	tmp = mv->tmp;
+	free(mv);
+	return (tmp);
 }
 
 typedef struct s_find_target {
