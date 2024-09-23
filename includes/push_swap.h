@@ -36,7 +36,7 @@ typedef enum e_operation
 typedef struct s_list_stack
 {
 	long					content;
-	struct s_list_stack	*next;
+	struct s_list_stack		*next;
 }				t_list_s;
 
 typedef struct s_stack

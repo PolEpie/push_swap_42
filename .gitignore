@@ -1,0 +1,7 @@
+push_swap
+tester/
+tester-2/
+checker
+checker_linux
+*.a
+*.o
