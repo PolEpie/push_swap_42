@@ -6,7 +6,7 @@
 /*   By: pepie <pepie@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 15:18:03 by pepie             #+#    #+#             */
-/*   Updated: 2024/05/01 12:15:18 by pepie            ###   ########.fr       */
+/*   Updated: 2024/09/23 11:57:16 by pepie            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ void	sort_stack_max_3(t_stack *stack)
 			ra(stack);
 			print_operation(RA);
 		}
+		sort_2_el(stack);
+	}
+	else
+	{
 		sort_2_el(stack);
 	}
 }
