@@ -1,3 +1,9 @@
 [submodule "libft"]
 	path = libft
 	url = https://github.com/PolEpie/libft_42.git
+[submodule "tester"]
+	path = tester
+	url = https://github.com/mateusmedeir/PushSwapTester.git
+[submodule "tester-2"]
+	path = tester-2
+	url = https://codeberg.org/ilshat/Push_Swap/src/branch/main/push_swap_tester.git
