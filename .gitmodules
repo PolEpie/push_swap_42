@@ -6,4 +6,4 @@
 	url = https://github.com/mateusmedeir/PushSwapTester.git
 [submodule "tester-2"]
 	path = tester-2
-	url = https://codeberg.org/ilshat/Push_Swap/src/branch/main/push_swap_tester.git
+	url = https://github.com/lmalki-h/push_swap_tester.git
