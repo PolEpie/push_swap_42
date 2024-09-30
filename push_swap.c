@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/* 
-void	print_stacks(t_stack *stack)
+
+/* void	print_stacks(t_stack *stack)
 {
 	t_list_s	*tmp1;
 	t_list_s	*tmp2;
@@ -98,7 +98,6 @@ bool	is_numeric(char *str, t_list_s **s)
 
 int	initialisation(t_stack *stack, char *input)
 {
-	t_list_s	*tmp;
 	char		**inputs;
 	char		**inputs_og;
 
@@ -107,7 +106,6 @@ int	initialisation(t_stack *stack, char *input)
 		return (1);
 	inputs_og = inputs;
 	stack->size_a = 0;
-	tmp = stack->stack_a;
 	while (*inputs != NULL)
 	{
 		if (is_numeric(*inputs, &stack->stack_a) == false)

@@ -103,7 +103,7 @@ bool	is_stack_sorted(t_list_s *src)
 
 bool	push_until_3_dest_stack(t_stack *stack)
 {
-	find_target_and_push_low(stack, stack->stack_a, stack->stack_b);
+	find_target_and_push_low(stack);
 	if (stack->size_a > 3)
 		return (push_until_3_dest_stack(stack));
 	sort_stack_max_3(stack);

@@ -59,12 +59,8 @@ static int	find_biggest(t_list_s *stack)
 
 int	find_target_node_small(t_list_s *stack, int number)
 {
-	t_list_s	*tmp;
-	int			i;
 	int			target_index;
 
-	tmp = stack;
-	i = 0;
 	target_index = find_smallest(stack, number);
 	if (target_index == -1)
 	{

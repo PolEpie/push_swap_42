@@ -26,6 +26,7 @@ SRCS		=	push_swap.c \
 				srcs/move_stack.c \
 				srcs/first_part.c \
 				srcs/first_part_cost.c \
+				srcs/first_part_cost_2.c \
 				srcs/second_part.c \
 				srcs/lst_stack.c \
 				srcs/lst_stack_2.c \

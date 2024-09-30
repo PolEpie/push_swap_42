@@ -78,19 +78,3 @@ t_list_s	*find_cost(t_stack *stk, int i_src, int index_dst, bool is_a_src)
 	free(mv);
 	return (tmp);
 }
-
-typedef struct s_find_target {
-	int				i;
-	int				lowest_cost;
-	int				lowest_cost_index;
-}	t_find_target;
-
-void	find_target_and_push_low(t_stack *stack, t_list_s *src, t_list_s *dst)
-{
-	t_list_s		*lowest;
-
-	lowest = find_cost(stack, 0,
-			find_target_node_small(dst, src->content), true);
-	ft_lstadd_back_stack(&lowest, ft_lstnew_stack(PB));
-	perform_lst(&lowest, stack);
-}

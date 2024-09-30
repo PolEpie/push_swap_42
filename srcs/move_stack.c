@@ -27,7 +27,7 @@ int	handle_move_both_stack(t_move *mv)
 			if (mv->src_go_up == UP)
 				ft_lstadd_back_stack(&mv->tmp, ft_lstnew_stack(RR));
 			else
-				ft_lstadd_back_stack(&mv->tmp, ft_lstnew_stack(RRA));
+				ft_lstadd_back_stack(&mv->tmp, ft_lstnew_stack(RRR));
 			i++;
 		}
 		mv->gap_a -= gap;
