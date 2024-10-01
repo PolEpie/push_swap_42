@@ -102,6 +102,7 @@ int	initialisation(t_stack *stack, char *input)
 	char		**inputs_og;
 
 	inputs = ft_split(input, ' ');
+	free(input);
 	if (!inputs)
 		return (1);
 	inputs_og = inputs;
@@ -109,17 +110,16 @@ int	initialisation(t_stack *stack, char *input)
 	while (*inputs != NULL)
 	{
 		if (is_numeric(*inputs, &stack->stack_a) == false)
-			return (1);
+			return (free_error(inputs, inputs_og, stack), 1);
 		if (!ft_lstadd_back_stack(&stack->stack_a,
 				ft_lstnew_stack(ft_atoi(*inputs))))
-			return (1);
+			return (free_error(inputs, inputs_og, stack), 1);
 		stack->size_a++;
 		free(*inputs);
 		inputs++;
 	}
 	free(inputs_og);
 	stack->size_b = 0;
-	free(input);
 	return (0);
 }
 
@@ -160,7 +160,7 @@ int	main(int ac, char **av)
 		return (write(2, "Error\n", 6), 1);
 	input = concat_input(ac, av);
 	if (!input || input[0] == 0)
-		return (write(2, "Error\n", 6), 1);
+		return (free(input), write(2, "Error\n", 6), 1);
 	stack.stack_a = NULL;
 	stack.stack_b = NULL;
 	if (initialisation(&stack, input) == 1)

@@ -82,3 +82,10 @@ void	case_0_cost(t_stack *stack, bool is_a)
 		print_operation(PA);
 	}
 }
+
+void	free_error(char **split, char **split_free, t_stack *stack)
+{
+	ft_freesplit(split);
+	free(split_free);
+	ft_lstclear_stack(&stack->stack_a);
+}

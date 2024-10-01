@@ -93,6 +93,9 @@ bool			is_stack_sorted(t_list_s *src);
 t_list_s		*find_cost(t_stack *stk, int i_src, int i_dst, bool is_a_s);
 void			perform_lst(t_list_s **lst, t_stack *stack);
 
+/* free_error */
+void			free_error(char **split, char **split_free, t_stack *stack);
+
 /* second_part */
 void			sort_stack_max_3(t_stack *stack);
 void			sort_stack_with_rotation(t_stack *stack);
